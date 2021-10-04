@@ -60,3 +60,24 @@ export async function getMovieByTitle(movieName){
         return error
     }
 }
+
+export async function getMovieByActor(actorName){
+    try {
+        const directoryPath = join(__dirname, './movies/');
+
+        const data = await (await getFiles(directoryPath))
+        .map(f => {
+            const movieData = readFileSync(f.path, 'utf8');
+            return JSON.parse(movieData)
+        })
+        .filter(f => 
+            f.actors.includes(actorName)
+        )
+
+        return data
+    
+    } catch (error) {
+        console.error(error);
+        return error
+    }
+}
