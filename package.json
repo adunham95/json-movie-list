@@ -5,11 +5,20 @@
   "version": "0.0.1",
   "repository": "https://github.com/jsonmc/jsonmc.git",
   "license": "MIT",
+  "main": "server.js",
+  "type": "module",
   "devDependencies": {
     "jshint": "^2.9.3",
-    "lodash.deburr": "^4.1.0"
+    "lodash.deburr": "^4.1.0",
+    "nodemon": "^2.0.13"
   },
   "scripts": {
+    "dev": "nodemon server.js",
     "test": "node tests/tests.js && ./node_modules/jshint/bin/jshint -e json movies/*/*.json actors/*.json"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-graphql": "^0.12.0",
+    "graphql": "^15.6.0"
   }
 }
