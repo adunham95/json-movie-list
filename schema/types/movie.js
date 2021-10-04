@@ -1,5 +1,5 @@
 import { GraphQLID, GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLString } from "graphql";
-import { convertToID, formatDate } from "../../functions.js";
+import { convertToID, formatDate, stringToArray } from "../../functions.js";
 
 const Movie = new GraphQLObjectType({
     name: "Movie",
@@ -36,8 +36,11 @@ const Movie = new GraphQLObjectType({
         },
         //TODO Convert to director type
         director: {
-            type: GraphQLString,
+            type: new GraphQLList(GraphQLString),
             description: "Director of the movie",
+            resolve: (source) => {
+                return stringToArray(source.director)
+            }
         }, 
         writers: {
             type: GraphQLNonNull(GraphQLList(GraphQLNonNull(GraphQLString))),

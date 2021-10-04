@@ -5,3 +5,14 @@ export function formatDate(date){
 export function convertToID(string){
     return string.split(' ').join('-').toLowerCase();
 }
+
+export function stringToArray(string){
+  if(typeof string === 'string'){
+    return [string]
+  }
+  if(typeof string === "undefined"){
+    return []
+  }
+
+  return string
+}

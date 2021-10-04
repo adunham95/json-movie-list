@@ -1,7 +1,7 @@
 import { readFile, readFileSync} from 'fs';
 import {readdir} from "fs/promises";
 import {join, resolve, dirname} from 'path';
-import { convertToID } from '../functions.js';
+import { convertToID, stringToArray } from '../functions.js';
 const __dirname = resolve(dirname(''));
 
 async function getFiles(path = "./") {
@@ -30,12 +30,12 @@ export async function getAllMovies(){
         const directoryPath = join(__dirname, './movies/');
 
         const data = await (await getFiles(directoryPath)).map(f => {
-            console.log(f.path)
+            // console.log(f.path)
             const actorData = readFileSync(f.path, 'utf8');
-            console.log(actorData)
+            // console.log(actorData)
             return JSON.parse(actorData)
         })
-        console.log(data)
+        // console.log(data)
         
         return data
       } catch (err) {
@@ -72,6 +72,29 @@ export async function getMovieByActor(actorName){
         })
         .filter(f => 
             f.actors.includes(actorName)
+        )
+
+        return data
+    
+    } catch (error) {
+        console.error(error);
+        return error
+    }
+}
+
+export async function getMovieByDirector(directorName){
+    try {
+        const directoryPath = join(__dirname, './movies/');
+
+        const data = await (await getFiles(directoryPath))
+        .map(f => {
+            const movieData = readFileSync(f.path, 'utf8');
+            let formatedMovieData = JSON.parse(movieData);
+            formatedMovieData.director = stringToArray(formatedMovieData.director)
+            return formatedMovieData;
+        })
+        .filter(f => 
+            f.director.includes(directorName)
         )
 
         return data

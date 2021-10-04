@@ -1,7 +1,7 @@
 import { GraphQLList, GraphQLObjectType, GraphQLString} from 'graphql';
 import { getAllActors, getSingleActor } from '../service/actor.js';
 import { getAllDirectors, getSingleDirector } from '../service/director.js';
-import {getAllMovies, getMovieByActor, getMovieByTitle } from "../service/movie.js"
+import {getAllMovies, getMovieByActor, getMovieByDirector, getMovieByTitle } from "../service/movie.js"
 import Actor from './types/actor.js';
 import Director from './types/director.js';
 import Movie from "./types/movie.js"
@@ -65,6 +65,17 @@ const query = new GraphQLObjectType({
           resolve: async(root, args, content) => {
             const {actorName} = args;
             return await getMovieByActor(actorName)
+          
+        }
+      },
+      movieByDirector: {
+        type: new GraphQLList(Movie),
+        args: {
+          directorName: {type: GraphQLString}
+        },
+          resolve: async(root, args, content) => {
+            const {directorName} = args;
+            return await getMovieByDirector(directorName)
           
         }
       },
