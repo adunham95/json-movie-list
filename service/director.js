@@ -17,7 +17,6 @@ export async function getSingleDirector(name){
 export async function getAllDirectors(){
     try {
         const directoryPath = path.join(__dirname, './directors/');
-
         const data = await fs.readdirSync(directoryPath).map(file => {
             const pathName = path.resolve(__dirname, `./directors/${file}`);
             const actorData = fs.readFileSync(pathName, 'utf8');

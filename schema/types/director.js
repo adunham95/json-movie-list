@@ -1,5 +1,7 @@
-import { GraphQLID, GraphQLObjectType, GraphQLString } from "graphql";
+import { GraphQLID, GraphQLList, GraphQLObjectType, GraphQLString } from "graphql";
 import { convertToID, formatDate } from "../../functions.js";
+import { getMovieByDirector } from "../../service/movie.js";
+import Movie from "./movie.js"
 
 const Director = new GraphQLObjectType({
     name: "Director",
@@ -8,6 +10,7 @@ const Director = new GraphQLObjectType({
             type: GraphQLID,
             description: 'Director ID',
             resolve: (source) => {
+                console.log(source)
                 return convertToID(source.name)
             }
         },
@@ -35,6 +38,13 @@ const Director = new GraphQLObjectType({
             resolve: (source) => {
                 return source.birthplace
             }
+      },
+      movies: {
+          type: new GraphQLList(Movie),
+          description: "Movies the have directed",
+          resolve: (source) => {
+            return getMovieByDirector(source.name)
+          }
       }
     }
 });
