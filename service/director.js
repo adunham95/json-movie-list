@@ -19,7 +19,6 @@ export async function getAllDirectors(){
         const directoryPath = path.join(__dirname, './directors/');
 
         const data = await fs.readdirSync(directoryPath).map(file => {
-            console.log(file)
             const pathName = path.resolve(__dirname, `./directors/${file}`);
             const actorData = fs.readFileSync(pathName, 'utf8');
             return JSON.parse(actorData)
