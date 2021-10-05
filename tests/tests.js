@@ -1,7 +1,12 @@
-const fs = require('fs');
-const assert = require('assert');
-const path = require('path');
-const deburr = require('lodash.deburr');
+// const fs = require('fs');
+// const assert = require('assert');
+// const path = require('path');
+// const deburr = require('lodash.deburr');
+
+import fs from "fs"
+import assert from "assert";
+import path from "path";
+import deburr from "lodash.deburr"
 
 const moviesFolder = './movies';
 const actorsFolder = './actors';
