@@ -20,7 +20,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "test": "node tests/tests.js && ./node_modules/jshint/bin/jshint -e json movies/*/*.json actors/*.json",
-    "test:server": "jest"
+    "test:server": "jest --watch"
   },
   "dependencies": {
     "express": "^4.17.1",
