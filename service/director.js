@@ -5,9 +5,15 @@ const __dirname = path.resolve(path.dirname(''));
 
 export async function getSingleDirector(name){
     try {
-        const pathName = path.resolve(__dirname, `./directors/${convertToID(name)}.json`)
-        const data = await fs.readFileSync(pathName, 'utf8');
-        return JSON.parse(data)
+        const pathName = path.resolve(__dirname, `./directors/${convertToID(name)}.json`);
+        if(!fs.existsSync(pathName)) {
+          return null
+        }
+        else {
+          const data = await fs.readFileSync(pathName, 'utf8');
+          return JSON.parse(data)
+        }
+       
       } catch (err) {
         console.error(err)
         return err
