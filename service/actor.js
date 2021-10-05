@@ -11,7 +11,7 @@ export async function getSingleActor(name){
         }
         else {
           const data = await fs.readFileSync(pathName, 'utf8');
-          console.log(data)
+          // console.log(data)
           return JSON.parse(data)
         }
       } catch (err) {
